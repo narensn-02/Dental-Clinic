@@ -132,7 +132,40 @@ function initNavigation() {
     document.body.style.overflow = "";
   }
 
-  // Active link highlighting on scroll
+  // Smooth scroll with precise sticky header offset for navigation links
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+      const targetId = this.getAttribute('href');
+      if (!targetId || targetId === '#') return;
+      const targetElement = document.querySelector(targetId);
+      if (targetElement) {
+        e.preventDefault();
+        const headerOffset = 76;
+        const elementPosition = targetElement.getBoundingClientRect().top;
+        const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+        window.scrollTo({
+          top: Math.max(0, offsetPosition),
+          behavior: 'smooth'
+        });
+
+        // Update active class immediately on clicked item
+        navLinks.forEach(l => l.classList.remove('active'));
+        if (this.classList.contains('nav-link')) {
+          this.classList.add('active');
+        } else {
+          const matchingNavLink = document.querySelector(`.nav-link[href="${targetId}"]`);
+          if (matchingNavLink) matchingNavLink.classList.add('active');
+        }
+
+        if (history.pushState) {
+          history.pushState(null, null, targetId);
+        }
+      }
+    });
+  });
+
+  // Active link highlighting on scroll (Scrollspy)
   const sections = document.querySelectorAll("section[id]");
   const navLinks = document.querySelectorAll(".nav-link");
 
