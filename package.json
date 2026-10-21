@@ -1,0 +1,22 @@
+{
+  "name": "smilecare-dental-studio-chennai",
+  "version": "1.0.0",
+  "description": "Premium modern dental clinic demo website for SmileCare Dental Studio in Chennai, Tamil Nadu",
+  "main": "index.html",
+  "scripts": {
+    "start": "npx serve -l 3000 .",
+    "dev": "npx serve -l 3000 .",
+    "deploy:surge": "npx surge .",
+    "deploy:vercel": "npx vercel --prod",
+    "deploy:netlify": "npx netlify deploy --prod --dir=."
+  },
+  "keywords": [
+    "dental-clinic",
+    "chennai",
+    "dentist-website",
+    "responsive-website",
+    "freelancer-demo"
+  ],
+  "author": "SmileCare Demo",
+  "license": "MIT"
+}
